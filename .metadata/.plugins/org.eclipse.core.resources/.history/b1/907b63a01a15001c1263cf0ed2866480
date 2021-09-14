@@ -1,0 +1,59 @@
+/*find all menus of page and mouseover to exam and click on FAQs
+ * 
+https://www.istqb.org/
+http://demo.automationtesting.in/Register.html
+ * */
+
+package demo;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import utility.BrowserOfWeb;
+
+public class DynamicMenus {
+
+	public static void main(String[] args) {
+		
+		WebDriver driver=BrowserOfWeb.openBrowser("https://www.istqb.org");
+		
+		Actions builder=new Actions(driver);
+		
+		List<WebElement> menus= driver.findElements(By.cssSelector("li.dropdown.mega>a"));
+		
+		for(WebElement m:menus) {
+			if(m.getText().trim().equalsIgnoreCase("Exams")){
+				System.out.println("item found");
+				
+				builder.moveToElement(m).perform();
+				break;	
+			}
+		}
+		
+//		for(int i=0;i<=menus.size();i++) {
+//			if(menus.get(i).getText().trim().equalsIgnoreCase("exam")){
+//				System.out.println("item found");
+//				
+//				builder.moveToElement(menus.get(i)).perform();
+//				break;	
+//			}
+//		}
+		List<WebElement> submenus= driver.findElements(By.cssSelector("div.mega-inner>ul>li>a"));
+		
+		for(WebElement sm:submenus) {
+			if(sm.getText().trim().equalsIgnoreCase("Exam FAQs")){
+				System.out.println("submenu found");
+				
+				sm.click();
+				break;	
+			}
+		}
+		
+
+	}
+
+}

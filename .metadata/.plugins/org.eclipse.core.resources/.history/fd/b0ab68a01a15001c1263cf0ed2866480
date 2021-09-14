@@ -1,0 +1,27 @@
+package demo;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import utility.BrowserOfWeb;
+
+public class HandlingPopups {
+
+	public static void main(String[] args) {
+		/*https://www.jobserve.com/in/en/Job-Search/
+https://demoqa.com/modal-dialogs*/
+		
+		WebDriver driver=BrowserOfWeb.openBrowser("https://www.irctc.co.in/nget/train-search");
+		
+		driver.findElement(By.cssSelector("button.btn btn-primary")).click();
+		driver.close();
+		
+		driver=BrowserOfWeb.openBrowser("https://demoqa.com/modal-dialogs");
+		driver.findElement(By.id("showLargeModal")).click();
+		System.out.println(driver.findElement(By.cssSelector("div.model-body>p")).getText());
+		driver.close();
+		
+		
+	}
+
+}
